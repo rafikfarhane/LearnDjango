@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Post
+from django.http import HttpResponse
 
 # Create your views here.
 def posts_list(request):
@@ -10,3 +11,7 @@ def posts_list(request):
 #3 pass the data on the template, so we can use it in our post-list template
 # third param. in render()
 #für 'posts' wird das query-set posts gespeichert
+
+def post_page(request, slug):
+    post = Post.objects.get(slug=slug)
+    return render(request, 'posts/post_page.html', {'post': post})
